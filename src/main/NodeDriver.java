@@ -21,12 +21,13 @@ public class NodeDriver {
         nodes.get(4).setLeft(nodes.get(6));
 
         // Test Printing Methods
+        System.out.println("PreOrder:");
         root.printPreOrder();
-        System.out.println();
+        System.out.println("\nPostOrder:");
         root.printPostOrder();
-        System.out.println();
+        System.out.println("\nInOrder:");
         root.printInOrder();
-        System.out.println();
+        System.out.println("\nTree Print:");
         root.print();
     }
 }
