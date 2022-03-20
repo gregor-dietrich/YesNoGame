@@ -1,4 +1,5 @@
 *.iml
+lib/
 
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java,intellij,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java,intellij,visualstudiocode
