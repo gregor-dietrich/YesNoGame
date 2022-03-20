@@ -12,6 +12,11 @@ public final class QuestionTree {
         this.root = root;
     }
 
+    public void print() {
+        if (root != null) root.print();
+        else System.out.println("Tree is empty.");
+    }
+
     public Question getRoot() {
         return root;
     }
