@@ -1,6 +1,7 @@
 package game;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 public final class Question implements Serializable {
     private String data;
@@ -21,12 +22,12 @@ public final class Question implements Serializable {
 
     private void print(final String prefix, final boolean isTail) {
         if (yes != null) yes.print(prefix + (isTail ? "|" : " ") + "   ", false);
-        System.out.println(prefix + (isTail ? "\\" : "/") + "-- " + data);
+        System.out.println(prefix + (isTail ? "\\" : "/") + "-- " + getData());
         if (no != null) no.print(prefix + (isTail ? " " : "|") + "   ", true);
     }
 
     public String getData() {
-        return data;
+        return data.substring(0, 1).toUpperCase(Locale.ROOT) + data.substring(1);
     }
 
     public void setData(final String data) {

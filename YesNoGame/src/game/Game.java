@@ -16,8 +16,8 @@ public final class Game {
     }
 
     private static void mainLoop() {
-        var switchFlag = false;
         if (tree.getRoot() == null || tree.getCurrent() == null) return;
+        var switchFlag = false;
         System.out.println("(d: tree diagram)");
         System.out.println("(q: quit)");
         System.out.println(tree.getCurrent().getData() + " (y/n)");
@@ -89,7 +89,7 @@ public final class Game {
             objectOutputStream.close();
         }
         catch (IOException ignored) {
-            System.out.println("Error saving data.");
+            System.out.println("Error saving tree data.");
         }
     }
 
@@ -108,7 +108,7 @@ public final class Game {
             }
         }
         catch (IOException | ClassNotFoundException ignored) {
-            System.out.println("Error loading data.");
+            System.out.println("Error loading tree data.");
         }
     }
 }
