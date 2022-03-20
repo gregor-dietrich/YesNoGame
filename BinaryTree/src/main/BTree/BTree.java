@@ -1,6 +1,6 @@
 package main.BTree;
 
-public final class BTree implements IBTreeObject {
+public final class BTree {
     private Node root;
     private Node currentNode;
 
