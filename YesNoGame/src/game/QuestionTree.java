@@ -14,6 +14,18 @@ public final class QuestionTree implements Serializable {
         this.root = root;
     }
 
+    public int countAnimals() {
+        return countAnimals(root);
+    }
+
+    private int countAnimals(final QuestionNode node) {
+        if (node == null) return 0;
+        int count = node.isAnimal() ?  1 : 0;
+        count += countAnimals(node.getYesNode());
+        count += countAnimals(node.getNoNode());
+        return count;
+    }
+
     public void print() {
         if (root != null) root.print();
         else System.out.println("Tree is empty.");

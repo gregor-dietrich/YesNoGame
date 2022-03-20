@@ -10,7 +10,7 @@ public final class Game {
 
     public static void main(String[] args) {
         loadTree();
-        System.out.println("Let's play a game!");
+        System.out.println("Let's play a game! I know " + tree.countAnimals() + " animals!");
         System.out.println("You think of an animal, and I have to find out which one it is!");
         mainLoop();
     }
