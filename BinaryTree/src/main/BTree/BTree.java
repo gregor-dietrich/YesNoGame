@@ -5,11 +5,11 @@ public final class BTree {
     private Node currentNode;
 
     public BTree() {
-        root = null;
+        this(null);
     }
 
     public BTree(final Node root) {
-        this.root = root;
+        setRoot(root);
     }
 
     public void printPreOrder() {

@@ -6,9 +6,9 @@ public final class Node {
     private Node right;
 
     public Node(final int data) {
-        this.data = data;
-        this.left = null;
-        this.right = null;
+        setData(data);
+        setLeft(null);
+        setRight(null);
     }
 
     public int getData() {
@@ -39,7 +39,6 @@ public final class Node {
         print("", true);
     }
 
-    // third param ("sb") is useless?
     private void print(final String prefix, final boolean isTail) {
         if (right != null) right.print(prefix + (isTail ? "|" : " ") + "   ", false);
         System.out.println(prefix + (isTail ? "\\" : "/") + "-- " + data);
