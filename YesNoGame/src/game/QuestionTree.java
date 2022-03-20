@@ -20,7 +20,7 @@ public final class QuestionTree implements Serializable {
 
     private int countAnimals(final QuestionNode node) {
         if (node == null) return 0;
-        int count = node.isAnimal() ?  1 : 0;
+        int count = node.isAnimal() ? 1 : 0;
         count += countAnimals(node.getYesNode());
         count += countAnimals(node.getNoNode());
         return count;

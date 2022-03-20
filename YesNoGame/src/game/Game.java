@@ -22,10 +22,9 @@ public final class Game {
                 final var objectInputStream = new ObjectInputStream(new FileInputStream("tree.dat"));
                 tree = (QuestionTree) objectInputStream.readObject();
                 objectInputStream.close();
-            }
-            else createTree();
-        }
-        catch (IOException | ClassNotFoundException ignored) {
+                tree.setCurrent(tree.getRoot());
+            } else createTree();
+        } catch (IOException | ClassNotFoundException ignored) {
             System.out.println("Error loading tree data.");
             createTree();
         }
@@ -43,18 +42,16 @@ public final class Game {
             objectOutputStream.writeObject(tree);
             objectOutputStream.flush();
             objectOutputStream.close();
-        }
-        catch (IOException ignored) {
+        } catch (IOException ignored) {
             System.out.println("Error saving tree data.");
         }
     }
 
     private static String inputPrompt() {
         try {
-            var readString = reader.readLine();
+            final var readString = reader.readLine();
             return readString.equals("") ? inputPrompt() : readString;
-        }
-        catch (IOException ignored) {
+        } catch (IOException ignored) {
             System.out.println("Something went wrong. Please try again.");
             return inputPrompt();
         }
@@ -79,8 +76,7 @@ public final class Game {
                 if (tree.getCurrent().isAnimal()) {
                     System.out.println("I knew it!\nLet's play again!");
                     tree.setCurrent(tree.getRoot());
-                }
-                else {
+                } else {
                     inputString = "n";
                     switchFlag = true;
                 }
