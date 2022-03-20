@@ -1,6 +1,8 @@
 package game;
 
-public final class QuestionTree {
+import java.io.Serializable;
+
+public final class QuestionTree implements Serializable {
     private Question root;
     private Question currentQuestion;
 

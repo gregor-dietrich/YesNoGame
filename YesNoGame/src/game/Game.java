@@ -1,18 +1,15 @@
 package game;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Locale;
 import java.util.Objects;
 
 public final class Game {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private static final QuestionTree tree = new QuestionTree();
+    private static QuestionTree tree;
 
     public static void main(String[] args) {
-        tree.setRoot(new Question("Is it a mammal?"));
-        tree.setCurrent(tree.getRoot());
+        loadTree();
         System.out.println("Let's play a game!");
         System.out.println("You think of an animal, and I have to find out which one it is!");
         mainLoop();
@@ -25,11 +22,11 @@ public final class Game {
         System.out.println("(q: quit)");
         System.out.println(tree.getCurrent().getData() + " (y/n)");
         var inputString = inputPrompt().toLowerCase(Locale.ROOT);
-        if (Objects.equals(inputString, "q")) return;
-        if (Objects.equals(inputString, "d")) {
-            tree.print();
+        if (Objects.equals(inputString, "q")) {
+            saveTree();
             return;
         }
+        if (Objects.equals(inputString, "d")) tree.print();
         if (Objects.equals(inputString, "y")) {
             if (tree.getCurrent().getYes() != null)
                 tree.setCurrent(tree.getCurrent().getYes());
@@ -81,6 +78,37 @@ public final class Game {
         catch (IOException ignored) {
             System.out.println("Something went wrong. Please try again.");
             return inputPrompt();
+        }
+    }
+
+    private static void saveTree() {
+        try {
+            final var objectOutputStream = new ObjectOutputStream(new FileOutputStream("tree.dat"));
+            objectOutputStream.writeObject(tree);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        }
+        catch (IOException ignored) {
+            System.out.println("Error saving data.");
+        }
+    }
+
+    private static void loadTree() {
+        try {
+            final var file = new File("tree.dat");
+            if (file.exists() && !file.isDirectory()) {
+                final var objectInputStream = new ObjectInputStream(new FileInputStream("tree.dat"));
+                tree = (QuestionTree) objectInputStream.readObject();
+                objectInputStream.close();
+            }
+            else {
+                tree = new QuestionTree();
+                tree.setRoot(new Question("Is it a mammal?"));
+                tree.setCurrent(tree.getRoot());
+            }
+        }
+        catch (IOException | ClassNotFoundException ignored) {
+            System.out.println("Error loading data.");
         }
     }
 }
