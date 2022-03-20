@@ -3,14 +3,14 @@ package game;
 import java.io.Serializable;
 
 public final class QuestionTree implements Serializable {
-    private Question root;
-    private Question currentQuestion;
+    private QuestionNode root;
+    private QuestionNode currentQuestion;
 
     public QuestionTree() {
         this(null);
     }
 
-    public QuestionTree(final Question root) {
+    public QuestionTree(final QuestionNode root) {
         this.root = root;
     }
 
@@ -19,19 +19,19 @@ public final class QuestionTree implements Serializable {
         else System.out.println("Tree is empty.");
     }
 
-    public Question getRoot() {
+    public QuestionNode getRoot() {
         return root;
     }
 
-    public void setRoot(final Question root) {
+    public void setRoot(final QuestionNode root) {
         this.root = root;
     }
 
-    public Question getCurrent() {
+    public QuestionNode getCurrent() {
         return currentQuestion;
     }
 
-    public void setCurrent(final Question current) {
+    public void setCurrent(final QuestionNode current) {
         this.currentQuestion = current;
     }
 }

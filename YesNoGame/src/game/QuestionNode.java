@@ -3,16 +3,16 @@ package game;
 import java.io.Serializable;
 import java.util.Locale;
 
-public final class Question implements Serializable {
+public final class QuestionNode implements Serializable {
     private String data;
-    private Question yes;
-    private Question no;
+    private QuestionNode yesNode;
+    private QuestionNode noNode;
     private boolean animal;
 
-    public Question(final String data) {
+    public QuestionNode(final String data) {
         this.data = data;
-        this.yes = null;
-        this.no = null;
+        this.yesNode = null;
+        this.noNode = null;
         this.animal = false;
     }
 
@@ -21,9 +21,9 @@ public final class Question implements Serializable {
     }
 
     private void print(final String prefix, final boolean isTail) {
-        if (yes != null) yes.print(prefix + (isTail ? "|" : " ") + "   ", false);
+        if (yesNode != null) yesNode.print(prefix + (isTail ? "|" : " ") + "   ", false);
         System.out.println(prefix + (isTail ? "\\" : "/") + "-- " + getData());
-        if (no != null) no.print(prefix + (isTail ? " " : "|") + "   ", true);
+        if (noNode != null) noNode.print(prefix + (isTail ? " " : "|") + "   ", true);
     }
 
     public String getData() {
@@ -34,20 +34,20 @@ public final class Question implements Serializable {
         this.data = data;
     }
 
-    public Question getYes() {
-        return yes;
+    public QuestionNode getYesNode() {
+        return yesNode;
     }
 
-    public void setYes(final Question yes) {
-        if (this.yes == null) this.yes = yes;
+    public void setYesNode(final QuestionNode yesNode) {
+        if (this.yesNode == null) this.yesNode = yesNode;
     }
 
-    public Question getNo() {
-        return no;
+    public QuestionNode getNoNode() {
+        return noNode;
     }
 
-    public void setNo(final Question no) {
-        if (this.no == null) this.no = no;
+    public void setNoNode(final QuestionNode noNode) {
+        if (this.noNode == null) this.noNode = noNode;
     }
 
     public boolean isAnimal() {
