@@ -1,6 +1,6 @@
-package main;
+package main.BTree;
 
-public final class Node {
+public final class Node implements IBTreeObject {
     private int data;
     private Node left;
     private Node right;
@@ -35,16 +35,15 @@ public final class Node {
         if (this.right == null) this.right = right;
     }
 
-    public String print() {
-        return print("", true, "");
+    public void print() {
+        print("", true);
     }
 
     // third param ("sb") is useless?
-    public String print(final String prefix, final boolean isTail, final String sb) {
-        if (right != null) right.print(prefix + (isTail ? "|" : " ") + "   ", false, sb);
+    private void print(final String prefix, final boolean isTail) {
+        if (right != null) right.print(prefix + (isTail ? "|" : " ") + "   ", false);
         System.out.println(prefix + (isTail ? "\\" : "/") + "-- " + data);
-        if (left != null) left.print(prefix + (isTail ? " " : "|") + "   ", true, sb);
-        return sb;
+        if (left != null) left.print(prefix + (isTail ? " " : "|") + "   ", true);
     }
 
     public void printPreOrder() {
