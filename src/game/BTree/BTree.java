@@ -1,6 +1,8 @@
-package main.BTree;
+package game.BTree;
 
-public final class BTree {
+import java.util.Objects;
+
+public class BTree extends ABTreeObj {
     private Node root;
     private Node currentNode;
 
@@ -12,20 +14,25 @@ public final class BTree {
         setRoot(root);
     }
 
+    @Override
     public void printPreOrder() {
         root.printPreOrder();
     }
 
+    @Override
     public void printPostOrder() {
         root.printPostOrder();
     }
 
+    @Override
     public void printInOrder() {
         root.printInOrder();
     }
 
+    @Override
     public void print() {
-        root.print();
+        if (root != null) root.print();
+        else System.out.println("Tree is empty.");
     }
 
     public boolean isEmpty() {
@@ -44,12 +51,12 @@ public final class BTree {
         return count;
     }
 
-    public boolean search(final int data) {
+    public boolean search(final String data) {
         return search(root, data);
     }
 
-    private boolean search(final Node node, final int data) {
-        if (node.getData() == data) return true;
+    private boolean search(final Node node, final String data) {
+        if (Objects.equals(node.getData(), data)) return true;
         if (node.getLeft() != null) if (search(node.getLeft(), data)) return true;
         if (node.getRight() != null) return search(node.getRight(), data);
         return false;
