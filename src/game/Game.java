@@ -1,6 +1,8 @@
 package game;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -17,9 +19,9 @@ public final class Game {
 
     private static void loadTree() {
         try {
-            final var file = new File("tree.dat");
+            final File file = new File("tree.dat");
             if (file.exists() && !file.isDirectory()) {
-                final var objectInputStream = new ObjectInputStream(new FileInputStream("tree.dat"));
+                final ObjectInputStream objectInputStream = new ObjectInputStream(Files.newInputStream(Paths.get("tree.dat")));
                 tree = (QuestionTree) objectInputStream.readObject();
                 objectInputStream.close();
                 tree.setCurrent(tree.getRoot());
@@ -38,7 +40,7 @@ public final class Game {
 
     private static void saveTree() {
         try {
-            final var objectOutputStream = new ObjectOutputStream(new FileOutputStream("tree.dat"));
+            final ObjectOutputStream objectOutputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get("tree.dat")));
             objectOutputStream.writeObject(tree);
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -49,8 +51,8 @@ public final class Game {
 
     private static String inputPrompt() {
         try {
-            final var readString = reader.readLine();
-            return readString.equals("") ? inputPrompt() : readString;
+            final String readString = reader.readLine();
+            return readString.isEmpty() ? inputPrompt() : readString;
         } catch (IOException ignored) {
             System.out.println("Something went wrong. Please try again.");
             return inputPrompt();
@@ -59,11 +61,11 @@ public final class Game {
 
     private static void mainLoop() {
         if (tree.getRoot() == null || tree.getCurrent() == null) return;
-        var switchFlag = false;
+        boolean switchFlag = false;
         System.out.println("(d: tree diagram)");
         System.out.println("(q: quit)");
         System.out.println(tree.getCurrent().getData() + " (y/n)");
-        var inputString = inputPrompt().toLowerCase(Locale.ROOT);
+        String inputString = inputPrompt().toLowerCase(Locale.ROOT);
         if (Objects.equals(inputString, "q")) {
             saveTree();
             return;
@@ -87,18 +89,18 @@ public final class Game {
                 tree.setCurrent(tree.getCurrent().getNoNode());
             else {
                 System.out.println("Really? I have no idea then!\nWhat animal was it?");
-                var animalString = inputPrompt();
+                final String animalString = inputPrompt();
                 System.out.println("Please enter a yes/no question for " + animalString + ":");
-                var questionString = inputPrompt();
+                String questionString = inputPrompt();
                 if (!questionString.endsWith("?")) questionString += "?";
                 System.out.println("And what would the answer be? (y/n)");
-                var answerString = inputPrompt().toLowerCase(Locale.ROOT);
+                String answerString = inputPrompt().toLowerCase(Locale.ROOT);
                 while (!(Objects.equals(answerString, "y")) && !(Objects.equals(answerString, "n"))) {
                     System.out.println("Please enter y or n:");
                     answerString = inputPrompt().toLowerCase(Locale.ROOT);
                 }
-                var question = new QuestionNode(questionString);
-                var animalQuestion = new QuestionNode("Is it a " + animalString + "?");
+                final QuestionNode question = new QuestionNode(questionString);
+                final QuestionNode animalQuestion = new QuestionNode("Is it a " + animalString + "?");
                 animalQuestion.setAnimal(true);
                 if (Objects.equals(answerString, "y")) question.setYesNode(animalQuestion);
                 if (Objects.equals(answerString, "n")) question.setNoNode(animalQuestion);

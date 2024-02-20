@@ -3,10 +3,10 @@ package TestDriver;
 import game.BTree.ABTreeObj;
 import game.BTree.Node;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ATestDriver {
-    protected static void setChildren(final Node root, final ArrayList<Node> nodes) {
+    protected static void setChildren(final Node root, final List<Node> nodes) {
         nodes.add(root);
         for (int i = 2; i < 8; i++) nodes.add(new Node(String.valueOf(i)));
         root.setLeft(nodes.get(1));
