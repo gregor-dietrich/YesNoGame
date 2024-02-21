@@ -1,6 +1,6 @@
 package TestDriver;
 
-import game.BTree.Node;
+import game.binaryTree.BinaryTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 public final class NodeDriver extends ATestDriver {
     public static void main(String[] args) {
         // Root Node
-        final Node root = new Node("1");
+        final BinaryTreeNode root = new BinaryTreeNode("1");
         // Child Nodes
-        final List<Node> nodes = new ArrayList<>();
+        final List<BinaryTreeNode> nodes = new ArrayList<>();
         setChildren(root, nodes);
         // Test Printing
         printAll(root);

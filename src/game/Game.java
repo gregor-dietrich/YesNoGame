@@ -1,5 +1,8 @@
 package game;
 
+import game.gameTree.GameTreeNode;
+import game.gameTree.GameTree;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,7 +11,7 @@ import java.util.Objects;
 
 public final class Game {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private static QuestionTree tree;
+    private static GameTree tree;
 
     public static void main(String[] args) {
         loadTree();
@@ -22,7 +25,7 @@ public final class Game {
             final File file = new File("tree.dat");
             if (file.exists() && !file.isDirectory()) {
                 final ObjectInputStream objectInputStream = new ObjectInputStream(Files.newInputStream(Paths.get("tree.dat")));
-                tree = (QuestionTree) objectInputStream.readObject();
+                tree = (GameTree) objectInputStream.readObject();
                 objectInputStream.close();
                 tree.setCurrent(tree.getRoot());
             } else createTree();
@@ -33,8 +36,8 @@ public final class Game {
     }
 
     private static void createTree() {
-        tree = new QuestionTree();
-        tree.setRoot(new QuestionNode("Is it a mammal?"));
+        tree = new GameTree();
+        tree.setRoot(new GameTreeNode("Is it a mammal?"));
         tree.setCurrent(tree.getRoot());
     }
 
@@ -99,8 +102,8 @@ public final class Game {
                     System.out.println("Please enter y or n:");
                     answerString = inputPrompt().toLowerCase(Locale.ROOT);
                 }
-                final QuestionNode question = new QuestionNode(questionString);
-                final QuestionNode animalQuestion = new QuestionNode("Is it a " + animalString + "?");
+                final GameTreeNode question = new GameTreeNode(questionString);
+                final GameTreeNode animalQuestion = new GameTreeNode("Is it a " + animalString + "?");
                 animalQuestion.setAnimal(true);
                 if (Objects.equals(answerString, "y")) question.setYesNode(animalQuestion);
                 if (Objects.equals(answerString, "n")) question.setNoNode(animalQuestion);

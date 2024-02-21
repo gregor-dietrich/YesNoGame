@@ -1,11 +1,13 @@
-package game.BTree;
+package game.binaryTree;
 
-public class Node extends ABTreeObj {
+public class BinaryTreeNode extends ABinaryTreeObj {
+    private static final long serialVersionUID = 1L;
+
     private String data;
-    private Node left;
-    private Node right;
+    private BinaryTreeNode left;
+    private BinaryTreeNode right;
 
-    public Node(final String data) {
+    public BinaryTreeNode(final String data) {
         setData(data);
         setLeft(null);
         setRight(null);
@@ -19,19 +21,19 @@ public class Node extends ABTreeObj {
         this.data = data;
     }
 
-    public Node getLeft() {
+    public BinaryTreeNode getLeft() {
         return left;
     }
 
-    public void setLeft(final Node left) {
+    public void setLeft(final BinaryTreeNode left) {
         if (this.left == null) this.left = left;
     }
 
-    public Node getRight() {
+    public BinaryTreeNode getRight() {
         return right;
     }
 
-    public void setRight(final Node right) {
+    public void setRight(final BinaryTreeNode right) {
         if (this.right == null) this.right = right;
     }
 
